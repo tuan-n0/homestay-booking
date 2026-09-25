@@ -2,9 +2,12 @@ spring:
   application:
     name: homestay
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5433/homestay_db}
-    username: ${DB_USER:homestay}
-    password: ${DB_PASSWORD:homestay}
+    # Mặc định dùng PostgreSQL 15 cài trên máy (cổng 5432).
+    # Mật khẩu không để trong mã nguồn: đặt trong backend/config/application.yml (không đẩy lên Git)
+    # hoặc biến môi trường DB_PASSWORD.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/homestay_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:}
   jpa:
     open-in-view: false
     hibernate:

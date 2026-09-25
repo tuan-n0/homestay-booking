@@ -8,17 +8,24 @@ lễ tân xác nhận, nhận phòng, trả phòng; chủ homestay khai báo ph�
 | Frontend | React 18 + TypeScript + Vite, Bootstrap 5 |
 | Backend | Spring Boot 4 (Java 17), Spring Security + JWT, Spring Data JPA, Flyway |
 | Cơ sở dữ liệu | PostgreSQL 15 (ràng buộc loại trừ chống đặt trùng phòng) |
-| Hạ tầng dev | Docker Compose: PostgreSQL, MinIO (ảnh phòng), Mailpit (email thử) |
+| Hạ tầng dev | PostgreSQL 15 cài trên máy; Docker Compose chạy MinIO (ảnh phòng), Mailpit (email thử) |
 
 ## Chạy trên máy phát triển
 
-Yêu cầu: JDK 17, Node 20+, Docker Desktop.
+Yêu cầu: JDK 17, Node 20+, PostgreSQL 15, Docker Desktop.
 
 ```bash
-# 1. Hạ tầng (PostgreSQL :5433, MinIO :9000/:9001, Mailpit :8025)
+# 1. Tạo database trống trên PostgreSQL 15 (cổng 5432) — bảng sẽ do Flyway tự tạo
+psql -U postgres -c "CREATE DATABASE homestay_db ENCODING 'UTF8' TEMPLATE template0;"
+
+# 2. Khai báo mật khẩu PostgreSQL của máy bạn (file này không được đẩy lên Git)
+cp backend/config/application.yml.example backend/config/application.yml
+#    rồi sửa dòng password trong file vừa tạo
+
+# 3. Dịch vụ phụ trợ (MinIO :9000/:9001, Mailpit :8025)
 docker compose up -d
 
-# 2. Backend — http://localhost:8080 (Swagger: /swagger-ui.html)
+# 4. Backend — http://localhost:8080 (Swagger: /swagger-ui.html)
 cd backend
 ./mvnw spring-boot:run
 

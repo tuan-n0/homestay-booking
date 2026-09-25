@@ -1,0 +1,7 @@
+# Sao chép file này thành application.yml (cùng thư mục) rồi điền mật khẩu PostgreSQL của máy bạn.
+# Spring Boot tự đọc backend/config/application.yml khi chạy từ thư mục backend.
+spring:
+  datasource:
+    # url: jdbc:postgresql://localhost:5432/homestay_db
+    # username: postgres
+    password: "mat-khau-postgres-cua-ban"
