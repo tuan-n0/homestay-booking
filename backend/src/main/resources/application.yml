@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: homestay
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/homestay_db}
+    username: ${DB_USER:homestay}
+    password: ${DB_PASSWORD:homestay}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none          # Flyway là nguồn sự thật duy nhất cho cấu trúc bảng
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:false}
+          starttls:
+            enable: ${MAIL_STARTTLS:false}
+          connectiontimeout: 5000
+          timeout: 5000
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 45MB
+
+logging:
+  charset:
+    console: UTF-8
+
+server:
+  port: ${SERVER_PORT:8080}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  timezone: Asia/Ho_Chi_Minh
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+  mail-from: ${MAIL_FROM:Homestay <no-reply@homestay.local>}
+  cors-origins: ${CORS_ORIGINS:http://localhost:5173}
+  jwt:
+    secret: ${JWT_SECRET:dev-only-secret-change-me-please-32bytes-minimum!!}
+    access-token-minutes: 30
+    refresh-token-days: 7
+  bootstrap-admin:
+    email: ${ADMIN_EMAIL:admin@homestay.local}
+    password: ${ADMIN_PASSWORD:Admin@123}
+  storage:
+    endpoint: ${S3_ENDPOINT:http://localhost:9000}
+    access-key: ${S3_ACCESS_KEY:minioadmin}
+    secret-key: ${S3_SECRET_KEY:minioadmin}
+    bucket: ${S3_BUCKET:homestay}
