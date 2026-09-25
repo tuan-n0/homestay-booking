@@ -1,0 +1,13 @@
+spring:
+  mail:
+    host: localhost
+    port: 1025
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 500
+          timeout: 500
+logging:
+  level:
+    root: WARN
+    com.homestay: INFO
