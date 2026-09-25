@@ -1,22 +1,8 @@
-# Hạ tầng cho môi trường phát triển: chạy `docker compose up -d`
-#   PostgreSQL : localhost:5433 (5432 để dành cho PostgreSQL cài sẵn trên máy)
-#   MinIO      : API localhost:9000, giao diện http://localhost:9001 (minioadmin / minioadmin)
-#   Mailpit    : SMTP localhost:1025, hộp thư http://localhost:8025
+# Dịch vụ phụ trợ cho môi trường phát triển: chạy `docker compose up -d`
+#   MinIO   : API localhost:9000, giao diện http://localhost:9001 (minioadmin / minioadmin) — lưu ảnh phòng
+#   Mailpit : SMTP localhost:1025, hộp thư http://localhost:8025 — xem email hệ thống gửi đi
+# Cơ sở dữ liệu dùng PostgreSQL 15 cài trực tiếp trên máy (localhost:5432, database homestay_db).
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: homestay-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: homestay_db
-      POSTGRES_USER: homestay
-      POSTGRES_PASSWORD: homestay
-      TZ: UTC
-    ports:
-      - "5433:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   minio:
     # Image chính thức minio/minio đã ngừng phát hành trên Docker Hub; dùng bản đóng gói của Bitnami
     image: bitnamilegacy/minio:latest
@@ -40,5 +26,4 @@ services:
       - "8025:8025"
 
 volumes:
-  pgdata:
   miniodata:

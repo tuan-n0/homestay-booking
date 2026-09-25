@@ -19,3 +19,6 @@ Thumbs.db
 .env
 *.log
 backups/
+
+# Cấu hình riêng từng máy (mật khẩu database...)
+backend/config/application.yml
